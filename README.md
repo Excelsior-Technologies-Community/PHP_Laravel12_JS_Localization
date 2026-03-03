@@ -1,59 +1,603 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHP_Laravel12_JS_Localization
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Description
 
-## About Laravel
+PHP_Laravel12_JS_Localization is a Laravel 12 demonstration project that implements multi-language support with JavaScript integration.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project allows users to dynamically switch between English and Hindi languages using URL-based localization. It also demonstrates how Laravel translation files can be accessed inside JavaScript using the Laravel JS Localization package.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The project is designed for beginners and developers who want to understand Laravel’s localization (i18n) system in a simple and practical way.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Real-World Use Case
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+This project concept is useful for:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Multi-language websites
 
-## Laravel Sponsors
+- E-commerce platforms
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Admin dashboards
 
-### Premium Partners
+- International web applications
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- SaaS platforms with global users
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+## Technologies Used
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Laravel 12
 
-## License
+- PHP 8+
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- MySQL (Optional)
+
+- Laravel-JS-Localization Package
+
+- HTML5
+
+- CSS3
+
+- JavaScript
+
+- Composer
+
+
+
+---
+
+
+
+## Installation Steps
+
+
+---
+
+
+## STEP 1: Create Laravel 12 Project
+
+### Open terminal / CMD and run:
+
+```
+composer create-project laravel/laravel PHP_Laravel12_JS_Localization "12.*"
+
+```
+
+### Go inside project:
+
+```
+cd PHP_Laravel12_JS_Localization
+
+```
+
+#### Explanation:
+
+Creates a fresh Laravel 12 application which will be used to build the localization system.
+
+
+
+## STEP 2: Database Setup (Optional)
+
+### Update database details:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel12_JS_Localization
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+
+### Create database in MySQL / phpMyAdmin:
+
+```
+Database name: laravel12_JS_Localization
+
+```
+
+#### Explanation:
+
+Configures Laravel to connect with MySQL database. Not mandatory for this project but useful for real applications.
+
+
+
+
+## STEP 3: Install Laravel-JS-Localization Package
+
+### Run:
+
+```
+composer require mariuzzo/laravel-js-localization
+
+```
+
+#### Explanation:
+
+Installs a package that allows Laravel translation files to be accessed inside JavaScript.
+
+
+
+
+
+## STEP 4: Publish Package Files
+
+### Run:
+
+```
+php artisan vendor:publish --provider="Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider"
+
+```
+
+### This will publish config at:
+
+```
+config/js-localization.php
+
+```
+
+#### Explanation:
+
+Publishes the configuration file so we can customize localization settings.
+
+
+
+
+
+## STEP 5: Configure the Package
+
+### Open config/js-localization.php
+
+#### Change locale path if needed, but default is fine:
+
+```
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Locale
+    |--------------------------------------------------------------------------
+    |
+    | If no locale is set, this locale will be used.
+    |
+    */
+
+    'defaultLocale' => config('app.locale'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Supported Locales
+    |--------------------------------------------------------------------------
+    |
+    | Add the locales that you want to make available to JavaScript.
+    |
+    */
+
+    'supportedLocales' => [
+        'en',
+        'hi',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Language Files Path
+    |--------------------------------------------------------------------------
+    |
+    | Path to the language files directory.
+    |
+    */
+
+    'langPath' => resource_path('lang'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | JavaScript Route Name
+    |--------------------------------------------------------------------------
+    |
+    | Route where the JavaScript localization file will be accessible.
+    |
+    */
+
+    'routeName' => 'assets.lang',
+
+    /*
+    |--------------------------------------------------------------------------
+    | JavaScript Route URL
+    |--------------------------------------------------------------------------
+    |
+    | URL that will serve the localization JS file.
+    |
+    */
+
+    'routeUrl' => 'js/lang.js',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Translations
+    |--------------------------------------------------------------------------
+    |
+    | Cache translations for better performance in production.
+    | Set false while developing.
+    |
+    */
+
+    'cache' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Key
+    |--------------------------------------------------------------------------
+    |
+    | Cache key used to store translations.
+    |
+    */
+
+    'cacheKey' => 'js_localization',
+
+];
+
+```
+
+#### Explanation:
+
+Defines supported languages (English & Hindi) and sets the JavaScript translation route.
+
+
+
+
+
+## STEP 6: Create Language File
+
+1. English
+
+### Create: resources/lang/en/messages.php
+
+```
+<?php
+
+return [
+    'welcome' => 'Welcome to Laravel JS Localization',
+    'greeting' => 'Hello, :Name!',
+];
+
+```
+
+2. Hindi
+
+### Create: resources/lang/hi/messages.php
+
+```
+<?php
+
+return [
+    'welcome' => 'लारवेल जावास्क्रिप्ट लोकलाइजेशन में आपका स्वागत है',
+    'greeting' =>  'नमस्ते, :Name!',
+];
+
+```
+
+#### Explanation:
+
+Creates translation files for each language inside resources/lang/ directory.
+
+
+
+
+
+## STEP 7: Add Route for Language Switching
+
+### Open routes/web.php and add:
+
+```
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/{locale?}', function ($locale = 'en') {
+
+    if (!in_array($locale, ['en', 'hi'])) {
+        $locale = 'en';
+    }
+
+    app()->setLocale($locale);
+
+    return view('welcome');
+});
+
+```
+
+#### Explanation:
+
+Creates a dynamic route that changes the application language based on URL parameter.
+
+
+
+
+## STEP 8: Create SetLocale Middleware
+
+### Create middleware:
+
+```
+php artisan make:middleware SetLocale
+
+```
+
+### Open: app/Http/Middleware/SetLocale.php
+
+```
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+
+class SetLocale
+{
+    public function handle(Request $request, Closure $next)
+    {
+        $locale = Session::get('locale', config('app.locale'));
+        App::setLocale($locale);
+
+        return $next($request);
+    }
+}
+
+```
+
+#### Explanation:
+
+Middleware reads selected language and sets the application locale globally.
+
+
+
+
+## STEP 9: Register Middleware
+
+### Modify the withMiddleware() section like this:
+
+```
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . '/../routes/web.php',
+        commands: __DIR__ . '/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function ($middleware) {
+        $middleware->append(\App\Http\Middleware\SetLocale::class);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
+
+
+```
+
+#### Explanation:
+
+Registers the custom middleware so Laravel applies language selection on every request.
+
+
+
+
+
+## STEP 10: Update Blade File
+
+### Open: resources/views/welcome.blade.php
+
+#### Replace content with:
+
+```
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laravel Localization</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        .locale {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-en {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-hi {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="locale">
+            Current Locale: <strong>{{ app()->getLocale() }}</strong>
+        </div>
+
+        <h1>{{ __('messages.welcome') }}</h1>
+
+        <div class="buttons">
+            <a href="/en" class="btn btn-en">English</a>
+            <a href="/hi" class="btn btn-hi">हिंदी</a>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let greeting = @json(__('messages.greeting', ['Name' => 'Demo']));
+            alert(greeting);
+
+        });
+    </script>
+
+</body>
+
+</html>
+
+```
+
+#### Explanation:
+
+Displays translated text on the page and passes translations to JavaScript using @json().
+
+
+
+
+## STEP 11: Test the Project
+
+### Start the server:
+
+```
+php artisan serve
+
+```
+
+### Open in browser:
+
+```
+http://127.0.0.1:8000
+
+```
+
+
+#### Explanation:
+
+Starts Laravel development server and verifies language switching functionality in browser.
+
+
+
+
+## Expected Output:
+
+### Main Output:
+
+<img width="1919" height="926" alt="Screenshot 2026-03-03 125556" src="https://github.com/user-attachments/assets/94baea66-9635-4a11-bd63-2e1a2ee3ff09" />
+
+
+### English Output:
+
+
+<img width="1919" height="748" alt="Screenshot 2026-03-03 125610" src="https://github.com/user-attachments/assets/5679b317-fb1c-430c-b3ec-88eea3d3f128" />
+
+<img width="1919" height="874" alt="Screenshot 2026-03-03 125622" src="https://github.com/user-attachments/assets/d79a1024-d148-4d34-b51d-4206682bd93a" />
+
+### Hindi Output:
+
+
+<img width="1919" height="790" alt="Screenshot 2026-03-03 125631" src="https://github.com/user-attachments/assets/efbb43b0-bb15-4076-84f6-307985f2249e" />
+
+<img width="1919" height="936" alt="Screenshot 2026-03-03 125657" src="https://github.com/user-attachments/assets/5260b32f-6757-4fe6-8197-e777f06e63f8" />
+
+
+
+---
+
+# Project Folder Structure:
+
+```
+PHP_Laravel12_JS_Localization
+│
+├── app
+│   ├── Http
+│   │   ├── Middleware
+│   │   │   └── SetLocale.php
+│   │   └── Controllers
+│   │
+│   └── Models
+│
+├── bootstrap
+│   └── app.php
+│
+├── config
+│   └── js-localization.php
+│
+├── database
+│
+├── public
+│
+├── resources
+│   ├── lang
+│   │   ├── en
+│   │   │   └── messages.php
+│   │   └── hi
+│   │       └── messages.php
+│   │
+│   └── views
+│       └── welcome.blade.php
+│
+├── routes
+│   └── web.php
+│
+├── storage
+│
+├── tests
+│
+├── .env
+├── composer.json
+└── README.md
+```
