@@ -8,59 +8,52 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 400px;
-        }
-
-        .locale {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            margin: 15px 0;
-            color: #333;
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        .btn {
-            text-decoration: none;
-            padding: 8px 18px;
-            margin: 5px;
-            border-radius: 6px;
-            font-weight: bold;
             transition: 0.3s;
         }
 
-        .btn-en {
-            background: #4CAF50;
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        select,
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: #333;
             color: white;
         }
 
-        .btn-hi {
-            background: #ff9800;
-            color: white;
+        .dark-mode {
+            background: #121212 !important;
+            color: white !important;
         }
 
-        .btn:hover {
-            opacity: 0.8;
+        .dark-mode .card {
+            background: #1e1e1e !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -69,25 +62,55 @@
 
     <div class="card">
 
-        <div class="locale">
-            Current Locale: <strong>{{ app()->getLocale() }}</strong>
-        </div>
+        <h2>{{ __('messages.welcome') }}</h2>
 
-        <h1>{{ __('messages.welcome') }}</h1>
+        <p>Current Locale: <b>{{ app()->getLocale() }}</b></p>
 
-        <div class="buttons">
-            <a href="/en" class="btn btn-en">English</a>
-            <a href="/hi" class="btn btn-hi">हिंदी</a>
-        </div>
+        <!-- LANGUAGE SWITCHER -->
+        <select id="languageSwitcher">
+            <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+            <option value="hi" {{ app()->getLocale() == 'hi' ? 'selected' : '' }}>Hindi</option>
+        </select>
+
+        <!-- DARK MODE -->
+        <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
 
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        // ================= LANGUAGE SWITCH =================
+        document.getElementById('languageSwitcher').addEventListener('change', function() {
+            let lang = this.value;
 
-            let greeting = @json(__('messages.greeting', ['Name' => 'Demo']));
-            alert(greeting);
+            localStorage.setItem('lang', lang);
 
+            window.location.href = "/lang/" + lang;
+        });
+
+        // just set dropdown value (NO redirect)
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedLang = localStorage.getItem('lang');
+
+            if (savedLang) {
+                document.getElementById('languageSwitcher').value = savedLang;
+            }
+        });
+
+        // ================= DARK MODE =================
+        const toggleBtn = document.getElementById("darkModeToggle");
+
+        if (localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark-mode");
+        }
+
+        toggleBtn.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
         });
     </script>
 
