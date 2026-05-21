@@ -7,7 +7,7 @@ Route::get('/', function () {
     return redirect('/lang/en');
 });
 
-// ONLY display page here (NO redirect logic inside controller)
+// Display page (NO redirect logic inside controller)
 Route::get('/lang/{locale}', function ($locale) {
 
     if (!in_array($locale, ['en', 'hi'])) {
@@ -20,3 +20,9 @@ Route::get('/lang/{locale}', function ($locale) {
 
     return view('welcome');
 });
+
+// NEW: AJAX route for real-time language switching
+Route::post('/switch-language', [LanguageController::class, 'switchLanguage'])->name('switch.language');
+
+// NEW: Get translation for specific key
+Route::get('/get-translation/{key}/{locale}', [LanguageController::class, 'getTranslation']);
