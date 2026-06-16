@@ -10,7 +10,12 @@ class SetLocale
 {
     public function handle(Request $request, Closure $next)
     {
-        $locale = session('locale', 'en');
+        $locale = session('locale');
+
+        if (!$locale) {
+            $locale = $request->getPreferredLanguage(['en', 'hi']);
+            session(['locale' => $locale]);
+        }
 
         if (!in_array($locale, ['en', 'hi'])) {
             $locale = 'en';
