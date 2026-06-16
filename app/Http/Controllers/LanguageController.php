@@ -20,7 +20,6 @@ class LanguageController extends Controller
         return redirect('/lang/' . $locale);
     }
 
-    // NEW: AJAX method for real-time language switching
     public function switchLanguage(Request $request)
     {
         $locale = $request->locale;
@@ -32,10 +31,9 @@ class LanguageController extends Controller
         session(['locale' => $locale]);
         App::setLocale($locale);
 
-        // Get all translations for current language
         $translations = [
-            'welcome' => __('messages.welcome'),
-            'greeting' => __('messages.greeting'),
+            'welcome' => __db('welcome'),
+            'greeting' => __db('greeting'),
             'current_locale' => app()->getLocale(),
             'language_name' => $locale == 'en' ? 'English' : 'हिन्दी (Hindi)',
             'translation_count' => count(trans('messages')),
@@ -45,15 +43,13 @@ class LanguageController extends Controller
         return response()->json($translations);
     }
 
-    // NEW: Get specific translation
     public function getTranslation($key, $locale)
     {
         App::setLocale($locale);
-        $translation = __("messages.{$key}");
         
         return response()->json([
             'key' => $key,
-            'translation' => $translation,
+            'translation' => __db($key),
             'locale' => $locale
         ]);
     }
